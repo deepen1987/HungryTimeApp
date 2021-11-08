@@ -1,0 +1,109 @@
+-- Database Creation Query
+CREATE DATABASE restaurant
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+	
+-- Address Table
+CREATE TABLE IF NOT EXISTS public.address
+(
+    address_id SERIAL NOT NULL PRIMARY KEY,
+    city VARCHAR(80) NOT NULL,
+    state VARCHAR(10) NOT NULL
+);
+
+-- User Table
+CREATE TABLE IF NOT EXISTS public."users"
+(
+    user_id SERIAL NOT NULL PRIMARY KEY,
+    address_id INTEGER NOT NULL,
+    CONSTRAINT fk_address_id FOREIGN KEY (address_id)
+        REFERENCES public.address (address_id)
+);
+
+-- Restaurant Table
+CREATE TABLE IF NOT EXISTS public.restaurants
+(
+	restaurant_id SERIAL NOT NULL PRIMARY KEY,
+	restaurant_name VARCHAR(150) NOT NULL,
+	street VARCHAR(256),
+	address_id INTEGER NOT NULL,
+	postal_code VARCHAR(10) NOT NULL,
+	latitude DECIMAL(10,8),
+	longitude DECIMAL(11,8),
+	stars DECIMAL(3,2),
+	review_count INTEGER,
+	CONSTRAINT fk_address_id FOREIGN KEY (address_id)
+		REFERENCES public.address (address_id)
+);
+
+-- Review Table
+CREATE TABLE IF NOT EXISTS public.reviews
+(
+	review_id SERIAL PRIMARY KEY NOT NULL,
+	stars DECIMAL(3,2) NOT NULL,
+	"comment" TEXT,
+	user_id INTEGER NOT NULL,
+	restaurant_id INTEGER NOT NULL,
+	"date" DATE NOT NULL,
+	CONSTRAINT fk_user_id FOREIGN KEY (user_id)
+		REFERENCES public."users" (user_id),
+	CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id)
+		REFERENCES public.restaurants (restaurant_id)
+);
+
+-- Cuisine Table
+CREATE TABLE IF NOT EXISTS public.cuisines
+(
+	cuisine_id SERIAL PRIMARY KEY NOT NULL,
+	cuisine_name VARCHAR(100) NOT NULL
+);
+
+-- Resturants Cuisines table
+CREATE TABLE IF NOT EXISTS public.restaurantcuisine
+(
+	rest_cui_id SERIAL PRIMARY KEY NOT NULL,
+	restaurant_id INTEGER NOT NULL,
+	cuisine_id INTEGER NOT NULL,
+	CONSTRAINT fk_cuisine_id FOREIGN KEY (cuisine_id)
+		REFERENCES public.cuisines (cuisine_id),
+	CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id)
+		REFERENCES public.restaurants (restaurant_id)
+);
+
+-- Restaurant Staging table
+CREATE TABLE IF NOT EXISTS public.restaurantstaging
+(
+	restaurant_id SERIAL NOT NULL PRIMARY KEY,
+	restaurant_name VARCHAR(150) NOT NULL,
+	street VARCHAR(256),
+    city VARCHAR(80) NOT NULL,
+    "state" VARCHAR(10) NOT NULL,
+	postal_code VARCHAR(10) NOT NULL,
+	cuisine_name VARCHAR(100) NOT NULL,
+	latitude DECIMAL(10,8),
+	longitude DECIMAL(11,8),
+	stars DECIMAL(3,2),
+	review_count INTEGER
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
