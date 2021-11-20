@@ -16,10 +16,25 @@ CREATE TABLE IF NOT EXISTS public.address
 -- User Table
 CREATE TABLE IF NOT EXISTS public."users"
 (
-    user_id SERIAL NOT NULL PRIMARY KEY,
+    user_id VARCHAR(40) NOT NULL PRIMARY KEY,
     address_id INTEGER NOT NULL,
     CONSTRAINT fk_address_id FOREIGN KEY (address_id)
         REFERENCES public.address (address_id)
+);
+
+-- Review Table
+CREATE TABLE IF NOT EXISTS public.reviews
+(
+	review_id SERIAL PRIMARY KEY NOT NULL,
+	stars DECIMAL(3,2) NOT NULL,
+	"comment" TEXT,
+	user_id VARCHAR(20) NOT NULL,
+	restaurant_id INTEGER NOT NULL,
+	"date" DATE NOT NULL,
+	CONSTRAINT fk_user_id FOREIGN KEY (user_id)
+		REFERENCES public."users" (user_id),
+	CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id)
+		REFERENCES public.restaurants (restaurant_id)
 );
 
 -- Restaurant Table
@@ -36,21 +51,6 @@ CREATE TABLE IF NOT EXISTS public.restaurants
 	review_count INTEGER,
 	CONSTRAINT fk_address_id FOREIGN KEY (address_id)
 		REFERENCES public.address (address_id)
-);
-
--- Review Table
-CREATE TABLE IF NOT EXISTS public.reviews
-(
-	review_id SERIAL PRIMARY KEY NOT NULL,
-	stars DECIMAL(3,2) NOT NULL,
-	"comment" TEXT,
-	user_id INTEGER NOT NULL,
-	restaurant_id INTEGER NOT NULL,
-	"date" DATE NOT NULL,
-	CONSTRAINT fk_user_id FOREIGN KEY (user_id)
-		REFERENCES public."users" (user_id),
-	CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id)
-		REFERENCES public.restaurants (restaurant_id)
 );
 
 -- Cuisine Table
