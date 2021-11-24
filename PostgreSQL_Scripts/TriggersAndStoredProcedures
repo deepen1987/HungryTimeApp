@@ -99,14 +99,90 @@ BEGIN
 	ON CONFLICT ON CONSTRAINT restaurantcuisine_super_key
 	DO NOTHING;
 END; $$
-CALL public.insertinrestauranttable()
+-- CALL public.insertinrestauranttable()
+
+-- Stored Procedure to insert in user table
+
+CREATE OR REPLACE PROCEDURE insert_in_users
+(
+	userid VARCHAR(40),
+	in_city VARCHAR(40),
+	in_state VARCHAR(10)
+)
+	LANGUAGE plpgsql
+	AS $$
+DECLARE
+	addressid INTEGER;
+BEGIN
+	SELECT address_id
+	INTO addressid
+	FROM address
+	WHERE city = in_city AND state = in_state;
 	
+	INSERT INTO users (user_id, address_id)
+	VALUES (userid, addressid);
+END; $$
 
+-- CALL public.insert_in_users('619b19c66bae71363f82de42', 'Boston', 'MA')
 
+select * from users
 
+-- Stored procedure to insert in review table
 
+CREATE OR REPLACE PROCEDURE insert_update_reviews
+(
+	in_stars INTEGER,
+	in_comment TEXT,
+	in_userid VARCHAR(40),
+	in_restaurantid INTEGER
+)
+	LANGUAGE plpgsql
+	AS $$
+DECLARE
+	verify_exists VARCHAR(5) = NULL;
+	old_stars INTEGER;
+BEGIN
+	SELECT 'YES' INTO verify_exists FROM reviews
+	WHERE user_id = in_userid AND restaurant_id = in_restaurantid;
+	
+	IF verify_exists is NULL THEN
+		INSERT INTO reviews (stars, "comment", user_id, restaurant_id, "date")
+		VALUES (in_stars, in_comment, in_userid, in_restaurantid, CURRENT_DATE);
+		
+		UPDATE restaurants
+		SET stars = ((stars * review_count) + in_stars) / (review_count + 1),
+			review_count = review_count + 1
+		WHERE restaurant_id = in_restaurantid;
+		
+	ELSE
+		SELECT stars INTO old_stars FROM reviews 
+		WHERE user_id = in_userid AND restaurant_id = in_restaurantid;
+		
+		UPDATE reviews
+		SET stars = in_stars,
+			"comment" = in_comment,
+			"date" = CURRENT_DATE
+		WHERE user_id = in_userid AND restaurant_id = in_restaurantid;
+		
+		UPDATE restaurants
+		SET stars = ((stars * review_count) - (old_stars - in_stars)) / review_count
+		WHERE restaurant_id = in_restaurantid;
+	END IF;
+END; $$
 
+-- CALL public.insert_update_reviews(5, 'Very good restaurant liked the dumplings.', '619b19c66bae71363f82de42', 61793);
 
+-- select * from reviews;
+-- select * from restaurants where restaurant_id = 61793;
+
+-- DELETE from reviews;
+-- update restaurants
+-- set stars = 5.00
+-- where restaurant_id = 61793
+
+-- update restaurants
+-- set review_count = 10
+-- where restaurant_id = 61793
 
 
 
