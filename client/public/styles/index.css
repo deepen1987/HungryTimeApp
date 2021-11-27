@@ -1,0 +1,32 @@
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background: linear-gradient(90deg,#ee346d 0,#ff624d);
+}
+
+.container {
+  max-width: 960px;
+}
+
+.pricing-header {
+  max-width: 700px;
+}
+
+.btn {
+  margin-bottom: 10px;
+  background: linear-gradient(90deg,#ee346d 0,#ff624d);
+}
+
+.link-footer{
+  color: #212432;
+}
+
+.user-info{
+  color: #212432;
+}
+
+#search {
+  padding-top: 10px;
+}

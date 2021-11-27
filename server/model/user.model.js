@@ -20,41 +20,41 @@ const userSchema = new mongoose.Schema({
         max: 50,
         required: [true, "Lastname is required"]
     },
-    city: {
-        type: String,
-        max: 50,
-        required: [true, "City is required"]
-    },
     state: {
         type: String,
         max: 4,
         required: [true, "State is required"]
+    },
+    city: {
+        type: String,
+        max: 50,
+        required: [true, "City is required"]
     },
     email: {
         type: String,
         validate: [validator.isEmail, "Please provide a valid email address"],
         required: [true, 'Email is required'],
         unique: true
-  },
-  password: {
-      type: String,
-      required: [true, "password is required"],
-      minlength: 8,
-  },
-  newPassword: {
-    type: String,
-    minlength: 8,
-},
-preferences: {
-    type: [ String ],
-    validate: {
-        validator: function(value){
-            return Array.isArray(value) && !value.length < 1 && value.length < 11
-        },
-        message: "preferences are required"
     },
-    required: true
-},
+    password: {
+        type: String,
+        required: [true, "password is required"],
+        minlength: 8,
+    },
+    newPassword: {
+        type: String,
+        minlength: 8,
+    },
+    preferences: {
+        type: [ String ],
+        validate: {
+            validator: function (value) {
+                return Array.isArray(value) && !value.length < 1 && value.length < 11
+            },
+            message: "preferences are required"
+        },
+        required: true
+    },
 });
 
 userSchema.pre("save", async function (next) {
@@ -79,9 +79,10 @@ userSchema.methods.comparePassword = async function (password) {
 };
 
 userSchema.methods.generateVerificationToken = function () {
-    return jwt.sign({id: this._id}, jwtPrivateSecret, {
+    return jwt.sign({ id: this._id }, jwtPrivateSecret, {
         expiresIn: "10d",
-        algorithm: "RS256"});
+        algorithm: "RS256"
+    });
 };
 
 userSchema.statics.checkExistingField = async (field, value) => {
@@ -91,7 +92,7 @@ userSchema.statics.checkExistingField = async (field, value) => {
 
 const User = mongoose.model("User", userSchema);
 
-function insertUser(userID, userCity, userState){
+function insertUser(userID, userCity, userState) {
     pg.query(`CALL public.insert_in_users('${userID}', '${userCity}', '${userState}')`);
 }
 

@@ -47,10 +47,12 @@ passport.use(
           return cb(null, false, {statusCode: 409, message: 'Email already registered, log in instead'});
         }
   
-        const checkUserName = await User.checkExistingField('userName', req.body.userName);
-        if (checkUserName) {
-          return cb(null, false, {statusCode: 409, message: 'Username exists, please try another'});
-        }
+        // Not using username field.
+
+        // const checkUserName = await User.checkExistingField('userName', req.body.userName);
+        // if (checkUserName) {
+        //   return cb(null, false, {statusCode: 409, message: 'Username exists, please try another'});
+        // }
   
         const newUser = new User();
         newUser.email = req.body.email;

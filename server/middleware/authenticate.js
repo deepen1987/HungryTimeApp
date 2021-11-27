@@ -6,7 +6,7 @@ const DEBUG = debug('dev');
 
 
 function authenticate(req, res, next) {
-    passportJWT.authenticate('jwt-hungry', { session: false }, (err, user, info) => {
+    passportJWT.authenticate('jwt', { session: false }, (err, user, info) => {
       if (err) {
         return next(err);
       }

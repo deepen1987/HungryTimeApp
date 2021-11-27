@@ -8,7 +8,7 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #ed7780;
+  background: linear-gradient(90deg,#ee346d 0,#ff624d);
 }
 
 .form-signin {
@@ -16,6 +16,7 @@ body {
   max-width: 330px;
   padding: 15px;
   margin: auto;
+  background-color: white;
 }
 
 .form-signin .checkbox {
@@ -40,4 +41,5 @@ body {
 
 .btn {
   margin-bottom: 10px;
+  background: linear-gradient(90deg,#ee346d 0,#ff624d);
 }

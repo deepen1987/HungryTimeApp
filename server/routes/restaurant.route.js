@@ -8,9 +8,9 @@ const { userRecommendation, cityRecommendation, cuisines, cities, states } = res
 const restRouter = Router();
 
 restRouter.get('/userRec', authenticate, catchAsync(userRecommendation));
-restRouter.get('/cityRec', authenticate, catchAsync(cityRecommendation));
-restRouter.get('/cuisines', authenticate, catchAsync(cuisines));
-restRouter.get('/cities', authenticate, catchAsync(cities));
-restRouter.get('/states', authenticate, catchAsync(states));
+restRouter.get('/cityRec', catchAsync(cityRecommendation));
+restRouter.get('/cuisines',  catchAsync(cuisines));
+restRouter.get('/cities',  catchAsync(cities));
+restRouter.get('/states',  catchAsync(states));
 
 export default restRouter;
