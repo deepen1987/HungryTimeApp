@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const password = document.getElementById("floatingPassword");
   const signup = document.getElementById("signup");
   const signin = document.getElementById("signin");
+  const inError = document.getElementById("in-error");
 
   signin.addEventListener("click", () => {
     let url = `http://localhost:5000/auth/login`;
@@ -11,44 +12,42 @@ document.addEventListener("DOMContentLoaded", () => {
       password: password.value,
     });
 
-    fetch(url, {
-      method: "POST",
-      body: data,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    })
-      .then((response) => {
-        if (response.status == 200) {
-          return response.json();
-        }
-      })
-      .then((data) => {
-        if (data.status === "success") {
-          localStorage.setItem("token", data.token);
-          console.log(localStorage.getItem("token"));
-          let key = "jwt";
-          let value = encodeURIComponent(data.token);
-          let min = 60 * 60 * 1;
-          document.cookie = `${key}=${value};path=/;max-age=${min}`;
-          window.location.href = "index.html";
-        }
-      })
-      .catch((err) => console.log(err.message));
+    if(email.value.trim() !=="" && password.value.trim() !== ""){
 
-    // console.log(document.cookie)
+      fetch(url, {
+        method: "POST",
+        body: data,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
+        .then((response) => {
+          if (response.status === 401) {
+            inError.innerHTML = ""
+            inError.innerHTML = `Incorrect email or password.`
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.status === "success") {
+
+            let key = "jwt";
+            let value = encodeURIComponent(data.token);
+            let min = 60 * 60 * 1;
+            document.cookie = `${key}=${value};path=/;max-age=${min}`;
+            window.location.href = "home.html";
+          }
+        })
+        .catch((err) => {
+            console.log(err.message)
+        });
+    }
+
+
+
   });
 
   signup.addEventListener("click", () => {
     window.location.href = "signup.html";
   });
 });
-
-// let userName = document.getElementById("floatingUsername")
-// let password = document.getElementById("floatingPassword")
-
-// export function signinForm(){
-//     const mainForm = document.getElementsByClassName("form-signin");
-
-//     mainForm[0].innerHTML = signinHTML
-//     }

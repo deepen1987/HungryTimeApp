@@ -17,9 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     signup.addEventListener("click", async () => {
 
-        var validateEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const validateEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!email.value.match(validateEmail)) {
             email.classList.add("is-invalid");
+            
         } else {
             email.classList.remove("is-invalid");
             signupForm.classList.add("was-validated");
@@ -48,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             data = await response.json()
         }
-
+        
 
     });
 

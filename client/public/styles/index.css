@@ -1,13 +1,13 @@
 body {
   display: flex;
   align-items: center;
-  padding-top: 40px;
   padding-bottom: 40px;
   background: linear-gradient(90deg,#ee346d 0,#ff624d);
 }
 
 .container {
-  max-width: 960px;
+  max-width: 100%;
+  
 }
 
 .pricing-header {
@@ -16,17 +16,50 @@ body {
 
 .btn {
   margin-bottom: 10px;
-  background: linear-gradient(90deg,#ee346d 0,#ff624d);
+  
 }
 
 .link-footer{
   color: #212432;
 }
 
-.user-info{
-  color: #212432;
+img, svg {
+  vertical-align: bottom;
+  border-radius: 8px;
 }
 
-#search {
-  padding-top: 10px;
+.main-class{
+  background: url(../images/food.jpg) center center / cover no-repeat;
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-family: 'Lakki Reddy', cursive;
+  font-size: 3rem;
+}
+
+@media (min-width: 500px) {
+  h1 {
+    font-size: 5rem;
+  }
+
+}
+
+@media (min-width: 800px) {
+  h1 {
+    font-size: 8rem;
+  }
+
+}
+
+@media (min-width: 1000px) {
+  h1 {
+    font-size: 10rem;
+  }
+
 }

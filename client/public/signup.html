@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="" />
+    <link rel="shortcut icon" href="./images/char_broiled-cheeseburger.svg" type="image/x-icon">
     <title>SignuUp Page</title>
 
     <!-- Normalize CSS -->
@@ -18,7 +19,7 @@
 </head>
 
 <body class="text-center">
-    <main class="form-signin">
+    <main class="form-signup">
         <form class="needs-validation" id="signup-form">
             <h1 class="h3 mb-3 fw-normal">Sign Up</h1>
             <p class="regular mb-20">*All Fields are required</p>
@@ -28,7 +29,7 @@
                 <label for="floatingFirstName">First Name</label>
                 <div class="invalid-feedback">
                     Please enter your first name.
-                  </div>
+                </div>
             </div>
             <div class="form-floating">
                 <input type="text" class="form-control" name="lastName" id="floatingLastname" placeholder="Last Name"
@@ -36,7 +37,7 @@
                 <label for="floatingLastname">Last Name</label>
                 <div class="invalid-feedback">
                     Please enter your last name.
-                  </div>
+                </div>
             </div>
 
             <div class="form-floating">
@@ -44,43 +45,43 @@
                 <label for="floatingEmail">Email</label>
                 <div class="invalid-feedback">
                     Please enter valid email.
-                  </div>
+                </div>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" name="password" id="floatingPassword"
-                    placeholder="Password" minlength="8" required />
+                <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password"
+                    minlength="8" required />
                 <label for="floatingPassword">Password</label>
                 <div class="invalid-feedback">
                     Please choose a password.
-                  </div>
+                </div>
             </div>
 
             <div class="form-floating">
-                <select id="floatingState" class="form-select" required>
+                <select id="floatingState" class="form-control form-select" required>
                 </select>
                 <label for="floatingState">Select State</label>
                 <div class="invalid-feedback">
                     Please select a state.
-                  </div>
+                </div>
             </div>
 
             <div class="form-floating">
-                <select id="floatingCity" class="form-select" required>
+                <select id="floatingCity" class="form-control form-select" required>
                 </select>
                 <label for="floatingCity">Select City</label>
                 <div class="invalid-feedback">
                     Please select a city.
-                  </div>
+                </div>
             </div>
 
             <div class="form-floating">
-                <select id="floatingCuisines" class="form-select" required>
+                <select id="floatingCuisines" class="form-control form-select" required>
                 </select>
                 <label for="floatingCuisines">Select Cuisine</label>
                 <!-- <button type="button" class="btn btn-primary" id="addCuisine">Add</button> -->
                 <div class="invalid-feedback">
                     Please select a cuisine.
-                  </div>
+                </div>
             </div>
             <div class="form-floating checks"></div>
 

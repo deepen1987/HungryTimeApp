@@ -3,7 +3,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { config } from "dotenv";
 import validator from "validator";
-import pg from "../db/postgreDB.js"
+import pg from "../db/postgreDB.js";
+import Joi from "joi";
 
 config();
 
@@ -84,6 +85,8 @@ userSchema.methods.generateVerificationToken = function () {
         algorithm: "RS256"
     });
 };
+
+
 
 userSchema.statics.checkExistingField = async (field, value) => {
     const checkField = await User.findOne({ [`${field}`]: value });

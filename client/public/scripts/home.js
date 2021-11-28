@@ -1,6 +1,10 @@
 import * as utilLocCuisine from "./utilityStateCityCuisine.js";
 import * as recommendation from "./recommendation.js";
 
+if(!getCookie("jwt")){
+    window.location.href = "signin.html";
+};
+
 document.addEventListener("DOMContentLoaded", () => {
 
     if(!getCookie("jwt")){
@@ -13,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const filterCity = document.getElementById("floatingCity");
     const filterCuisine = document.getElementById("floatingCuisines");
     const logout = document.getElementById("logout");
+    const reset = document.getElementById("reset");
 
 
 
@@ -36,26 +41,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+    // Reset Password
+    reset.addEventListener("click", () => {
+      window.location.href = "resetPassword.html";
+    })
+
     // Logging out
     logout.addEventListener("click", () => {
         document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         window.location.href = "signin.html";
     });
 
-    function getCookie(cname) {
-        let name = cname + "=";
-        let decodedCookie = decodeURIComponent(document.cookie);
-        let ca = decodedCookie.split(';');
-        for(let i = 0; i <ca.length; i++) {
-          let c = ca[i];
-          while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-          }
-        }
-        return "";
-      }
+
 });
 
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
