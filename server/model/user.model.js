@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     },
     city: {
         type: String,
-        max: 50,
+        max: 100,
         required: [true, "City is required"]
     },
     email: {
@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema({
         minlength: 8,
     },
     preferences: {
-        type: [ String ],
+        type: [String],
         validate: {
             validator: function (value) {
                 return Array.isArray(value) && !value.length < 1 && value.length < 11
@@ -86,6 +86,13 @@ userSchema.methods.generateVerificationToken = function () {
     });
 };
 
+function validateEmail(email) {
+    const validateEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!email.match(validateEmail)) {
+        return false;
+    }
+    return true;
+};
 
 
 userSchema.statics.checkExistingField = async (field, value) => {
@@ -99,4 +106,4 @@ function insertUser(userID, userCity, userState) {
     pg.query(`CALL public.insert_in_users('${userID}', '${userCity}', '${userState}')`);
 }
 
-export { User, insertUser };
+export { User, insertUser, validateEmail };

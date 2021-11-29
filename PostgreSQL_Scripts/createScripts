@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS public.address
 (
     address_id SERIAL NOT NULL PRIMARY KEY,
     city VARCHAR(80) NOT NULL,
-    state VARCHAR(10) NOT NULL
+    state VARCHAR(10) NOT NULL,
+	CONSTRAINT address_super_key UNIQUE (city, state)
 );
 
 -- User Table
@@ -20,6 +21,23 @@ CREATE TABLE IF NOT EXISTS public."users"
     address_id INTEGER NOT NULL,
     CONSTRAINT fk_address_id FOREIGN KEY (address_id)
         REFERENCES public.address (address_id)
+);
+
+-- Restaurant Table
+CREATE TABLE IF NOT EXISTS public.restaurants
+(
+	restaurant_id SERIAL NOT NULL PRIMARY KEY,
+	restaurant_name VARCHAR(150) NOT NULL,
+	street VARCHAR(256),
+	address_id INTEGER NOT NULL,
+	postal_code VARCHAR(10) NOT NULL,
+	latitude DECIMAL(10,8),
+	longitude DECIMAL(11,8),
+	stars DECIMAL(3,2),
+	review_count INTEGER,
+	CONSTRAINT fk_address_id FOREIGN KEY (address_id)
+		REFERENCES public.address (address_id),
+	CONSTRAINT restaurant_super_key UNIQUE (restaurant_name, street, address_id, postal_code, latitude, longitude)
 );
 
 -- Review Table
@@ -37,27 +55,11 @@ CREATE TABLE IF NOT EXISTS public.reviews
 		REFERENCES public.restaurants (restaurant_id)
 );
 
--- Restaurant Table
-CREATE TABLE IF NOT EXISTS public.restaurants
-(
-	restaurant_id SERIAL NOT NULL PRIMARY KEY,
-	restaurant_name VARCHAR(150) NOT NULL,
-	street VARCHAR(256),
-	address_id INTEGER NOT NULL,
-	postal_code VARCHAR(10) NOT NULL,
-	latitude DECIMAL(10,8),
-	longitude DECIMAL(11,8),
-	stars DECIMAL(3,2),
-	review_count INTEGER,
-	CONSTRAINT fk_address_id FOREIGN KEY (address_id)
-		REFERENCES public.address (address_id)
-);
-
 -- Cuisine Table
 CREATE TABLE IF NOT EXISTS public.cuisines
 (
 	cuisine_id SERIAL PRIMARY KEY NOT NULL,
-	cuisine_name VARCHAR(100) NOT NULL
+	cuisine_name VARCHAR(100) UNIQUE NOT NULL
 );
 
 -- Resturants Cuisines table
@@ -69,7 +71,8 @@ CREATE TABLE IF NOT EXISTS public.restaurantcuisine
 	CONSTRAINT fk_cuisine_id FOREIGN KEY (cuisine_id)
 		REFERENCES public.cuisines (cuisine_id),
 	CONSTRAINT fk_restaurant_id FOREIGN KEY (restaurant_id)
-		REFERENCES public.restaurants (restaurant_id)
+		REFERENCES public.restaurants (restaurant_id),
+	CONSTRAINT restaurantcuisine_super_key UNIQUE (restaurant_id, cuisine_id)
 );
 
 -- Restaurant Staging table
@@ -88,6 +91,20 @@ CREATE TABLE IF NOT EXISTS public.restaurantstaging
 	review_count INTEGER
 );
 
+-- Cuisine Staging Table
+CREATE TABLE IF NOT EXISTS public.cuisinesstaging
+(
+	cuisine_id SERIAL PRIMARY KEY NOT NULL,
+	cuisine_name VARCHAR(100) NOT NULL
+);
+
+-- Address Staging Table
+CREATE TABLE IF NOT EXISTS public.addressstaging
+(
+    address_id SERIAL NOT NULL PRIMARY KEY,
+    city VARCHAR(80) NOT NULL,
+    state VARCHAR(10) NOT NULL
+);
 
 
 

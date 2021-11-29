@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
       password: password.value,
     });
 
-    if(email.value.trim() !=="" && password.value.trim() !== ""){
+
 
       fetch(url, {
         method: "POST",
@@ -23,8 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
       })
         .then((response) => {
           if (response.status === 401) {
-            inError.innerHTML = ""
-            inError.innerHTML = `Incorrect email or password.`
+            window.location.href = "signinError.html";
+            // inError.innerHTML = "";
+            // inError.innerHTML = `Incorrect email or password.`;
           }
           return response.json();
         })
@@ -41,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch((err) => {
             console.log(err.message)
         });
-    }
+    
 
 
 

@@ -1,7 +1,7 @@
 import debug from 'debug';
 import { Strategy } from 'passport-local';
 import passport from 'passport';
-import { User, insertUser } from "../../model/user.model.js";
+import { User, insertUser, validateEmail } from "../../model/user.model.js";
 
 const DEBUG = debug('dev');
 
@@ -41,6 +41,12 @@ passport.use(
     'signup',
     new Strategy(authFields, async (req, email, password, cb) => {
       try {
+        
+        const validEmail = validateEmail(email) 
+        if(!validEmail) {
+          return cb(null, false, {statusCode: 400, message: "Invaild email address."});
+        }
+
         const checkEmail = await User.checkExistingField('email', email);
   
         if (checkEmail) {

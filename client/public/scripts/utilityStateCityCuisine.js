@@ -46,7 +46,7 @@ export async function getState() {
 // Fetching the cities from MongoDB
 export async function getcity() {
 
-    if (cityClick === 0) {
+    if (cityClick === 0 && state.value !== "") {
 
         let url = `http://localhost:5000/user/cities?state=${state.value}`;
         let cities, data;
@@ -77,7 +77,7 @@ export async function getcity() {
 // Fetching the cuisines from MongoDB
 export async function getCuisines() {
 
-    if (cuisineClick === 0) {
+    if (cuisineClick === 0 && state.value !== "" && city.value !== "") {
 
         let url = `http://localhost:5000/user/cuisines?state=${state.value}&city=${city.value}`;
         let cuisines, data;

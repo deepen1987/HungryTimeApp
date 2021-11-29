@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="" />
     <link rel="shortcut icon" href="./images/char_broiled-cheeseburger.svg" type="image/x-icon">
-    <title>SignuUp Page</title>
+    <title>SignUp</title>
 
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="./styles/normalize.css" />
@@ -52,12 +52,13 @@
                     minlength="8" required />
                 <label for="floatingPassword">Password</label>
                 <div class="invalid-feedback">
-                    Please choose a password.
+                    Please choose a password with minimum 8 characters.
                 </div>
             </div>
 
             <div class="form-floating">
                 <select id="floatingState" class="form-control form-select" required>
+                    <option selected disabled value="">Choose...</option>
                 </select>
                 <label for="floatingState">Select State</label>
                 <div class="invalid-feedback">
@@ -67,6 +68,7 @@
 
             <div class="form-floating">
                 <select id="floatingCity" class="form-control form-select" required>
+                    <option selected disabled value="">Choose...</option>
                 </select>
                 <label for="floatingCity">Select City</label>
                 <div class="invalid-feedback">
@@ -76,6 +78,7 @@
 
             <div class="form-floating">
                 <select id="floatingCuisines" class="form-control form-select" required>
+                    <option selected disabled value="">Choose...</option>
                 </select>
                 <label for="floatingCuisines">Select Cuisine</label>
                 <!-- <button type="button" class="btn btn-primary" id="addCuisine">Add</button> -->
@@ -88,6 +91,7 @@
             <button class="w-100 btn btn-lg btn-primary" type="button" id="signup">
                 Sign Up
             </button>
+            <p id="in-error"></p>
             <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
         </form>
     </main>

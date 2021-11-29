@@ -74,10 +74,20 @@
 
 -- Below Stored will be called after staging table receives data.
 
-CREATE OR REPLACE PROCEDURE insertinrestauranttable()
+CREATE OR REPLACE PROCEDURE insert_restaurant_address_cuisine_table()
 	LANGUAGE plpgsql
 	AS $$
 BEGIN
+	INSERT INTO  cuisines (cuisine_name)
+		SELECT cuisine_name FROM cuisinesstaging
+	ON CONFLICT ON CONSTRAINT cuisines_cuisine_name_key
+	DO NOTHING;
+	
+	INSERT INTO  address (city, "state")
+		SELECT city, "state" FROM addressstaging
+	ON CONFLICT ON CONSTRAINT address_super_key
+	DO NOTHING;
+	
 	INSERT INTO restaurants (restaurant_name, street, address_id, postal_code, latitude, longitude, stars, review_count)
 		SELECT restaurant_name, street, a.address_id, postal_code, latitude, longitude, stars, review_count
 		FROM restaurantstaging rs
@@ -99,7 +109,7 @@ BEGIN
 	ON CONFLICT ON CONSTRAINT restaurantcuisine_super_key
 	DO NOTHING;
 END; $$
--- CALL public.insertinrestauranttable()
+-- CALL public.insert_restaurant_address_cuisine_table()
 
 -- Stored Procedure to insert in user table
 

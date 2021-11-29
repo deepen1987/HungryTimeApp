@@ -9,7 +9,7 @@ const postgre_url = process.env.POSTGRE_DB
 const client = new pg.Client({
     user: 'postgres',
     host: 'localhost',
-    database: 'testrestaurant',
+    database: 'restaurant',
     password: 'Welcome@1',
     port: 5436,
 });

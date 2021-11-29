@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
             resetForm.classList.add("was-validated");
         }
 
-        if (email.value !== "" && passwordOld.value !== "" && passwordNew.value !== "") {
+        if (email.value.match(validateEmail) && passwordOld.value.length >= 8 && passwordNew.value.length >= 8) {
 
             let url = `http://localhost:5000/auth/resetPassword`;
             let data = new URLSearchParams({
@@ -40,14 +40,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Content-Type": "application/x-www-form-urlencoded",
                 }
             })
-            if (response.ok) {
+            if (response.status === 200) {
                 document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                 window.location.href = "signin.html";
             } else if (response.status === 401){
                 inError.innerHTML = ""
                 inError.innerHTML = `Incorrect email or password.`
+            }else {
+                // data = await response.json()
+                // console.log("data")
             }
-            console.log(data.error)
+            
         };
 
     });

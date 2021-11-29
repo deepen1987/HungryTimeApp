@@ -44,14 +44,6 @@
 
 <body>
 
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <symbol id="check" viewBox="0 0 16 16">
-            <title>Check</title>
-            <path
-                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-        </symbol>
-    </svg>
-
     <div class="container py-3">
 
         <!-- Header -->
@@ -60,7 +52,7 @@
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
                     <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                        <a href="home.html" class="d-flex align-items-center text-dark text-decoration-none">
                             <img src="./images/char_broiled-cheeseburger.svg" alt="">
 
                             <span class="fs-4"> HungryTime</span>
@@ -94,6 +86,7 @@
                     <div class="row row-cols-1 row-cols-md-4 mb-3">
                         <div class="form-floating col-md-3">
                             <select id="floatingState" class="form-select" required>
+                                <option selected disabled value="">Choose...</option>
                             </select>
                             <label for="floatingState">Select State</label>
                             <div class="invalid-feedback">
@@ -102,6 +95,7 @@
                         </div>
                         <div class="form-floating col-md-4">
                             <select id="floatingCity" class="form-select" required>
+                                <option selected disabled value="">Choose...</option>
                             </select>
                             <label for="floatingCity">Select City</label>
                             <div class="invalid-feedback">
@@ -110,6 +104,7 @@
                         </div>
                         <div class="form-floating col-md-3">
                             <select id="floatingCuisines" class="form-select" required>
+                                <option selected disabled value="">Choose...</option>
                             </select>
                             <label for="floatingCuisines">Select Cuisine</label>
                             <div class="invalid-feedback">
