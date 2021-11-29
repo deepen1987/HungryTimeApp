@@ -18,7 +18,9 @@ export async function userRecommendation() {
 
         for (const restaurant of cuisine.restaurants) {
 
-            const restaurantCard = `<div class="card mb-4 rounded-3 shadow-sm card-shadow">
+            const searchAddress = restaurant.restaurant_name.replace(" ", "+") + "+" + restaurant.city + "+" + restaurant.state
+            const restaurantCard = `<a href="https://www.google.com/maps/search/?api=1&query=${searchAddress}" target="_blank" class="geo-link">
+                    <div class="card mb-4 rounded-3 shadow-sm card-shadow">
                     <div class="card-header py-3 card-design">
                         <h4 class="my-0 fw-normal">${restaurant.restaurant_name}</h4>
                     </div>
@@ -30,7 +32,8 @@ export async function userRecommendation() {
                         </ul>
                         <!-- <button type="button" class="w-100 btn btn-lg btn-primary">Submit Rating</button> -->
                     </div>
-                </div>`;
+                </div>
+                </a>`;
             let div = document.createElement("div");
             div.classList.add("col");
             div.innerHTML = restaurantCard;
@@ -53,7 +56,9 @@ export async function cityRecommendation(city, state, cuisine) {
 
     for (const restaurant of restaurants) {
 
-        const restaurantCard = `<div class="card mb-4 rounded-3 shadow-sm card-shadow">
+        const searchAddress = restaurant.restaurant_name.replace(" ", "+") + "+" + restaurant.city + "+" + restaurant.state
+        const restaurantCard = `<a href="https://www.google.com/maps/search/?api=1&query=${searchAddress}" target="_blank" class="geo-link">
+        <div class="card mb-4 rounded-3 shadow-sm card-shadow">
                     <div class="card-header py-3 card-design">
                         <h4 class="my-0 fw-normal">${restaurant.restaurant_name}</h4>
                     </div>
@@ -65,7 +70,8 @@ export async function cityRecommendation(city, state, cuisine) {
                         </ul>
                         <!-- <button type="button" class="w-100 btn btn-lg btn-primary">Sign up for free</button> -->
                     </div>
-                </div>`
+                </div>
+                </a>`
         let div = document.createElement("div");
         div.classList.add("col");
         div.innerHTML = restaurantCard;

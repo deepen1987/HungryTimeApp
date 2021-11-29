@@ -3,7 +3,7 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background: linear-gradient(90deg,#ee346d 0,#ff624d);
+  background: linear-gradient(90deg, #ee346d 0, #ff624d);
 }
 
 .container {
@@ -16,14 +16,14 @@ body {
 
 .btn {
   margin-bottom: 10px;
-  background: linear-gradient(90deg,#ee346d 0,#ff624d);
+  background: linear-gradient(90deg, #ee346d 0, #ff624d);
 }
 
-.link-footer{
+.link-footer {
   color: #212432;
 }
 
-.user-info{
+.user-info {
   color: #212432;
 }
 
@@ -32,16 +32,23 @@ body {
 }
 
 .card-design {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   background-color: darkslategray;
   color: whitesmoke;
 }
 
+
 .card-shadow {
-  box-shadow: 0 .125rem .25rem rgba(0,0,0,2)!important;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 2) !important;
 }
 
-img, svg {
+.card-shadow:hover {
+  border: 2px black;
+  box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 2, 2) !important;
+}
+
+img,
+svg {
   vertical-align: bottom;
   border-radius: 8px;
 }
@@ -49,3 +56,13 @@ img, svg {
 .invalid-feedback {
   color: white !important;
 }
+
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+
