@@ -29,3 +29,14 @@ Description - The application is designed as a fullstack Restaurant Recommendati
   - #### Install postgre jars to be used with spark
     - Download the jar **postgresql-42.2.21.jar** https://jdbc.postgresql.org/download.html
     - Copy your jars at /Users/userAccountOnMac/jars/postgresql-42.2.21.jar
+
+### Instructions to run the program:
+
+1. Download the project folder.
+2. Setup PostgreSQL DB using Scripts available as part of Database.
+3. Setup Spark, PySpark and then update the paths for JSON and CSV files in the jupyter notebook as per the instructions in it. Then Run the jupyter notebook.
+4. Setup MongoDB.
+5. Run the Node servers both Client and Server.
+6. Register few users from the frontend.
+7. Run the Restaurant Recommendation jupyter notebook this time. This needs to be run every time a new user registers (Manually).
+8. Now login and check the restaurant recommendation.
