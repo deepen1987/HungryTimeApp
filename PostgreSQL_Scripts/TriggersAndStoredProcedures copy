@@ -1,4 +1,78 @@
--- Below Stored will be called after staging tables receives data.
+-- Below Stored will be called by the trigger when staging table receives data.
+
+-- CREATE OR REPLACE PROCEDURE insertinrestauranttable
+-- (
+-- 	restaurant_name_in VARCHAR(150),
+-- 	street_in VARCHAR(256),
+--     city_in VARCHAR(80),
+--     state_in VARCHAR(10),
+-- 	postal_code_in VARCHAR(10),
+-- 	latitude_in DECIMAL(10,8),
+-- 	longitude_in DECIMAL(11,8),
+-- 	stars_in DECIMAL(3,2),
+-- 	review_count_in INTEGER
+-- )
+-- LANGUAGE plpgsql
+-- AS $$
+-- DECLARE
+-- 	id_found INTEGER = NULL;
+-- 	addressid INTEGER = NULL;
+-- BEGIN
+-- 	SELECT address_id
+-- 	INTO addressid
+-- 	FROM address
+-- 	WHERE city = city_in
+-- 	AND "state" = state_in;
+	
+-- -- 	IF addressid IS NULL THEN
+-- -- 		RAISE EXCEPTION 'No Address Available';
+-- -- 	ELSE
+-- 	SELECT 1
+-- 	INTO id_found
+-- 	FROM restaurants
+-- 	WHERE restaurant_name = restaurant_name_in
+-- 	AND street = street_in
+-- 	AND address_id = addressid
+-- 	AND postal_code = postal_code_in
+-- 	AND latitude = latitude_in
+-- 	AND longitude = longitude_in
+-- 	AND stars = stars_in
+-- 	AND review_count = review_count_in;
+
+-- 	IF id_found is NULL THEN
+-- 		INSERT INTO restaurants (restaurant_name, street, address_id, postal_code, latitude, longitude, stars, review_count)
+-- 		VALUES (restaurant_name_in, street_in, addressid, postal_code_in, latitude_in, longitude_in, stars_in, review_count_in);
+-- 	END IF;	
+-- -- 	END IF;
+-- END; $$
+
+-- Below trigger is executed when data is inserted into Staging Table
+-- CREATE OR REPLACE FUNCTION insert_into_restaurant_from_staging()
+-- 	RETURNS TRIGGER
+-- 	LANGUAGE PLPGSQL
+-- 	AS
+-- $$
+-- BEGIN
+-- 	CALL public.insertinrestauranttable(NEW.restaurant_name, 
+-- 										NEW.street, 
+-- 										NEW.city, 
+-- 										NEW.state, 
+-- 										NEW.postal_code, 
+-- 										NEW.latitude,
+-- 									    NEW.longitude,
+-- 									   	NEW.stars,
+-- 									   	NEW.review_count);
+-- 	RETURN NEW;
+-- END;
+-- $$
+
+-- CREATE TRIGGER insert_in_restaurant_from_staging_trigger
+-- 	AFTER INSERT
+-- 	ON restaurantstaging
+-- 	FOR EACH ROW
+-- 	EXECUTE PROCEDURE insert_into_restaurant_from_staging();
+
+-- Below Stored will be called after staging table receives data.
 
 CREATE OR REPLACE PROCEDURE insert_restaurant_address_cuisine_table()
 	LANGUAGE plpgsql
@@ -107,4 +181,46 @@ BEGIN
 END; $$
 
 -- CALL public.insert_update_reviews(5, 'Very good restaurant liked the dumplings.', '619b19c66bae71363f82de42', 61793);
+
+-- select * from reviews;
+-- select * from restaurants where restaurant_id = 61793;
+
+-- DELETE from reviews;
+-- update restaurants
+-- set stars = 5.00
+-- where restaurant_id = 61793
+
+-- update restaurants
+-- set review_count = 10
+-- where restaurant_id = 61793
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+	
+	
+	
+	
 	
