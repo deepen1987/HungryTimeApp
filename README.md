@@ -36,7 +36,7 @@ Description - The application is designed as a fullstack Restaurant Recommendati
 2. Setup PostgreSQL DB using Scripts available as part of Database.
 3. Setup Spark, PySpark and then update the paths for JSON and CSV files in the jupyter notebook as per the instructions in it. Then Run the jupyter notebook.
 4. Setup MongoDB.
-5. Run the Node servers both Client and Server.
+5. Run the Node servers both Client and Server, this is needed as the website is locally hosted.
 6. Register few users from the frontend.
 7. Run the Restaurant Recommendation jupyter notebook this time. This needs to be run every time a new user registers (Manually).
 8. Now login and check the restaurant recommendation.
