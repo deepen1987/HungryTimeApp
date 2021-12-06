@@ -14,8 +14,10 @@ Description - The application is designed as a fullstack Restaurant Recommendati
 - ### MongoDB 
   - Download https://www.mongodb.com/try/download/community
   - MongoDB Compass (IDE) https://www.mongodb.com/try/download/compass
+  - PORT 27017
 - ### PostgreSQL DB 
   - Download https://www.postgresql.org/download/
+  - PORT 5436
 - ### PG Admin (IDE) 
   - Download https://www.pgadmin.org/download/
 - ### Python
