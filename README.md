@@ -1,5 +1,5 @@
 # HungryTimeApp 
-Description - The application is designed as a fullstack Restaurant Recommendation application.
+Description - The application is designed as a fullstack Restaurant Recommendation application. I have designed this application to run on localhost.
 
 ### Technology & Tools
 
