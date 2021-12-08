@@ -16,6 +16,7 @@ export default {
 
         const restaurants = await RestaurantRecommendation.findById(userID).select("cuisines ")
         
+        // Gives error when we set oriigin to *
         if (req.headers.origin == "http://localhost:8888" || req.headers.origin == "http://localhost:3001" ) {
             res.header('Access-Control-Allow-Origin', `${req.headers.origin}`);
         }

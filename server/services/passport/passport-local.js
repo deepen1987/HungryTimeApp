@@ -71,7 +71,7 @@ passport.use(
         
         await newUser.save();
 
-        // Inserting records in PostgreSQLDB
+        // Inserting records in PostgreSQL Stored Procedure
         insertUser(newUser._id.valueOf(), newUser.city, newUser.state);
 
         return cb(null, newUser);

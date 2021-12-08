@@ -9,12 +9,8 @@ const authRouter = Router();
 
 authRouter.post('/signup', catchAsync(signup));
 authRouter.post('/login', catchAsync(login));
-authRouter.get('/amiworthy', authenticate, catchAsync(protectedRoute));
-authRouter.delete('/deleteAccount', catchAsync(deleteAccount));
+// authRouter.get('/amiworthy', authenticate, catchAsync(protectedRoute));
+// authRouter.delete('/deleteAccount', catchAsync(deleteAccount));
 authRouter.put('/resetPassword', catchAsync(resetPassword));
-
-authRouter.get('/amiworthy', (req, res) => {
-    
-});
 
 export default authRouter;
