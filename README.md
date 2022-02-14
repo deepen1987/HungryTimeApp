@@ -40,3 +40,10 @@ Description - The application is designed as a fullstack Restaurant Recommendati
 6. Register few users from the frontend.
 7. Run the Restaurant Recommendation jupyter notebook. This needs to be run every time a new user registers (Manually).
 8. Now login and check the restaurant recommendation.
+
+### Images from the Project
+
+
+![Home](https://user-images.githubusercontent.com/76664637/153886677-9174d0e8-9207-49ea-9be6-9fc0042e77d5.png)
+![Landing](https://user-images.githubusercontent.com/76664637/153887263-0dbfdc38-7a01-4844-910a-5371a7e65dd4.png)
+![signin](https://user-images.githubusercontent.com/76664637/153887339-6a7bd371-2abc-4cf4-bf32-e64866a9704d.png)
